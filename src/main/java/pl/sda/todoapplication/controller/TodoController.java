@@ -1,6 +1,7 @@
 package pl.sda.todoapplication.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -48,14 +49,14 @@ public class TodoController {
 
     @ResponseBody
     @RequestMapping(value = "/todo/{id}", method = RequestMethod.PUT)
-    public String completeTodo(@PathVariable("id") Long id) {
+    public ResponseEntity<?> completeTodo(@PathVariable("id") Long id) {
 
         try {
             todoService.complete(id);
-            return "200 OK";
+            return new ResponseEntity<>(HttpStatus.OK);
         } catch (EntityNotFoundException exception) {
             // TODO: handle exception
-            return "400 Bad Request";
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
 
