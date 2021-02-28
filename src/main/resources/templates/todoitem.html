@@ -33,15 +33,24 @@
     <div id="content_header"></div>
     <div id="site_content">
         <div id="content">
-            <div>
-                Identyfikator: <p th:text="${todo.id}" />
-            </div>
-            <div>
-                Treść: <p th:text="${todo.text}" />
-            </div>
-            <div>
-                Data utworzenia: <p th:text="${todo.createDate}" />
-            </div>
+            <form class="form_settings" role="form" method="post" th:object="${todo}" th:action="@{/todo/update}">
+<!--                <div>-->
+<!--                    Identyfikator:-->
+<!--                    <input type="text" name="id" th:value="${todo.id}" readonly>-->
+<!--                </div>-->
+                <input type="hidden" name="id" th:value="${todo.id}">
+                <div>
+                    Treść:
+                    <input type="text" name="text" th:value="${todo.text}">
+                </div>
+                <div>
+                    Data utworzenia:
+                    <input type="text" name="createDate" th:value="${todo.createDate}" readonly>
+                </div>
+
+                <input type="submit" value="Zapisz">
+            </form>
+
             <div>
                 <button id="close-todo-button" class="button green-button">Zamknij zadanie</button>
             </div>

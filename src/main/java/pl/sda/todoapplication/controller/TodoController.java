@@ -79,4 +79,16 @@ public class TodoController {
 
         return "redirect:/todo";
     }
+
+    @RequestMapping(value = "/todo/update", method = RequestMethod.POST)
+    public String updateTodo(@ModelAttribute("todo") @Valid TodoDto dto, BindingResult result) {
+
+        if (result.hasErrors()) {
+            return "todoitem";
+        }
+
+        todoService.update(dto);
+
+        return "redirect:/todo";
+    }
 }

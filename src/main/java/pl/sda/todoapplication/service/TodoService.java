@@ -70,7 +70,20 @@ public class TodoService {
             todoEntity.setCompleted(true);
             todoEntity.setCompleteDate(new Date());
 
-            todoRepository.save(todoEntity);
+            todoEntity = todoRepository.save(todoEntity);
+            return TodoMapper.mapeEntityToDto(todoEntity);
+        }
+
+        throw new EntityNotFoundException();
+    }
+
+    public TodoDto update(TodoDto dto) {
+        Optional<TodoEntity> entity = todoRepository.findById(dto.getId());
+        if (entity.isPresent()) {
+            TodoEntity todoEntity = entity.get();
+            todoEntity.setText(dto.getText());
+
+            todoEntity = todoRepository.save(todoEntity);
             return TodoMapper.mapeEntityToDto(todoEntity);
         }
 
