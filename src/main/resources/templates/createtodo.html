@@ -5,7 +5,7 @@
     <title>simplestyle_banner</title>
     <meta name="description" content="website description" />
     <meta name="keywords" content="website keywords, website keywords" />
-    <meta http-equiv="content-type" content="text/html; charset=windows-1252" />
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
 </head>
 
@@ -36,16 +36,17 @@
 
             <form role="form" method="post" th:object="${todo}" th:action="@{/todo/add}">
 
-                <input type="text" name="text" placeholder="Wpisz tre?? zadania">
+                <input type="text" name="text" placeholder="Wpisz treść zadania">
 
                 <div th:if="${#fields.hasErrors('text')}">
-                    Tre?? zadania musi mie? od 4 do 255 znak�w
+                    Treść zadania musi mieć od 4 do 255 znaków
                 </div>
 
                 <input type="submit" value="Zapisz">
             </form>
 
         </div>
+    </div>
     <div id="content_footer"></div>
     <div id="footer">
         <p><a href="index_.html">Home</a> | <a href="examples.html">Examples</a> | <a href="page.html">A Page</a> | <a href="another_page.html">Another Page</a> | <a href="contact.html">Contact Us</a></p>
