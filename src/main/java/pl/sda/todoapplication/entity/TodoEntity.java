@@ -24,6 +24,10 @@ public class TodoEntity {
     @Column(nullable = true)
     private Date completeDate;
 
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private UserEntity user;
+
     public TodoEntity() {
 
     }
