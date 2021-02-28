@@ -1,13 +1,11 @@
 <!DOCTYPE HTML>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.com"
-      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.com">
 
 <head>
     <title>simplestyle_banner</title>
     <meta name="description" content="website description" />
     <meta name="keywords" content="website keywords, website keywords" />
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
 </head>
 
@@ -19,9 +17,6 @@
                 <!-- class="logo_colour", allows you to change the colour of the text -->
                 <h1><a href="index.html">simple<span class="logo_colour">style_banner</span></a></h1>
                 <h2>Simple. Contemporary. Website Template.</h2>
-                <h2 sec:authorize="isAuthenticated()">
-                    <span>Authenticated as <span sec:authentication="name"></span></span>
-                </h2>
             </div>
         </div>
         <div id="menubar">
@@ -38,33 +33,36 @@
     <div id="content_header"></div>
     <div id="site_content">
         <div id="content">
-            <h2>Zadania do zrobienia</h2>
-            <table>
-                <tr th:each="todo: ${active}">
-                    <td>
-                        <input type="hidden" th:value="${todo.id}" />
-                        <a th:href="@{/todo/} + ${todo.id}" th:text="${todo.id}"></a>
-                    </td>
-                    <td th:text="${todo.text}" />
-                    <td th:text="${todo.createDate}" />
-                    <td>
-                        <button class="close-todo-from-list">Zakończ</button>
-                    </td>
 
-                </tr>
-            </table>
+            <form class="form_settings" role="form" th:object="${user}" th:action="@{/user/register}" method="post">
 
-            <h2>Zadania zrobione</h2>
-            <table>
-                <tr th:each="todo: ${completed}">
-                    <td th:text="${todo.id}" />
-                    <td th:text="${todo.text}" />
-                    <td th:text="${todo.createDate}" />
-                </tr>
-            </table>
+                <div>
+                    <input type="text" name="username" placeholder="Wprowadź nazwę użytkownika">
+                </div>
+
+                <div>
+                    <input type="text" name="firstName" placeholder="Podaj imię">
+                </div>
+
+                <div>
+                    <input type="text" name="lastName" placeholder="Podaj nazwisko">
+                </div>
+
+                <div>
+                    <input type="password" name="password" placeholder="Wprowadź hasło">
+                </div>
+
+                <div>
+                    <input type="password" name="passwordConfirm" placeholder="Powtórz hasło">
+                </div>
+
+                <div>
+                    <input type="submit" value="Zapisz" class="button blue-button">
+                </div>
+
+            </form>
+
         </div>
-
-
     </div>
     <div id="content_footer"></div>
     <div id="footer">
