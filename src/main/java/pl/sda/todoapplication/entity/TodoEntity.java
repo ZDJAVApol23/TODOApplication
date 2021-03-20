@@ -76,4 +76,12 @@ public class TodoEntity {
     public void setCompleteDate(Date completeDate) {
         this.completeDate = completeDate;
     }
+
+    public UserEntity getUser() {
+        return user;
+    }
+
+    public void setUser(UserEntity user) {
+        this.user = user;
+    }
 }
