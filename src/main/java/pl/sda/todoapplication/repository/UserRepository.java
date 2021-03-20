@@ -10,4 +10,6 @@ import java.util.Optional;
 public interface UserRepository extends CrudRepository<UserEntity, Long> {
 
     UserEntity findByUsername(String username);
+
+    UserEntity findById(long id);
 }

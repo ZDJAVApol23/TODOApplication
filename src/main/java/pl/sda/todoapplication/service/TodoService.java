@@ -3,10 +3,12 @@ package pl.sda.todoapplication.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.sda.todoapplication.entity.TodoEntity;
+import pl.sda.todoapplication.entity.UserEntity;
 import pl.sda.todoapplication.mapper.TodoMapper;
 import pl.sda.todoapplication.model.CreateTodoDto;
 import pl.sda.todoapplication.model.TodoDto;
 import pl.sda.todoapplication.repository.TodoRepository;
+import pl.sda.todoapplication.repository.UserRepository;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.Date;
@@ -18,6 +20,9 @@ public class TodoService {
 
     @Autowired
     private TodoRepository todoRepository;
+
+    @Autowired
+    private UserRepository userRepository;
 
     public List<TodoDto> findAllActive() {
 
@@ -53,7 +58,14 @@ public class TodoService {
 
     public boolean create(CreateTodoDto todo) {
 
+        // pobieramy użytkownika z bazy
+        UserEntity userEntity = userRepository.findById(todo.getUserId());
+
         TodoEntity entity = new TodoEntity(todo.getText());
+
+        // łączymy relacyjnie tabele Todo i User
+        entity.setUser(userEntity);
+
         try {
             todoRepository.save(entity);
             return true;
