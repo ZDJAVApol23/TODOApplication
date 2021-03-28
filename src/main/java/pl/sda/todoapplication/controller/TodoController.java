@@ -11,6 +11,7 @@ import pl.sda.todoapplication.model.CreateTodoDto;
 import pl.sda.todoapplication.model.TodoDto;
 import pl.sda.todoapplication.service.TodoService;
 
+import javax.annotation.security.RolesAllowed;
 import javax.persistence.EntityNotFoundException;
 import javax.validation.Valid;
 import java.util.List;
@@ -60,6 +61,7 @@ public class TodoController {
         }
     }
 
+    @RolesAllowed("ROLE_ADMIN")
     @RequestMapping(value = "/todo/add", method = RequestMethod.GET)
     public String createTodo(Model model) {
 

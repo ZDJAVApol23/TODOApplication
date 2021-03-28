@@ -1,6 +1,7 @@
 package pl.sda.todoapplication.entity;
 
 import javax.persistence.*;
+import java.util.Collection;
 import java.util.List;
 
 @Entity(name = "Users")
@@ -24,6 +25,18 @@ public class UserEntity {
 
     @OneToMany(mappedBy = "user")
     private List<TodoEntity> todos;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "users_roles",
+            joinColumns = @JoinColumn(
+                    name = "user_id", referencedColumnName = "id"
+            ),
+            inverseJoinColumns = @JoinColumn(
+                    name = "role_id", referencedColumnName = "id"
+            )
+    )
+    private Collection<RoleEntity> roles;
 
     public Long getId() {
         return id;
@@ -71,5 +84,13 @@ public class UserEntity {
 
     public void setTodos(List<TodoEntity> todos) {
         this.todos = todos;
+    }
+
+    public Collection<RoleEntity> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Collection<RoleEntity> roles) {
+        this.roles = roles;
     }
 }
