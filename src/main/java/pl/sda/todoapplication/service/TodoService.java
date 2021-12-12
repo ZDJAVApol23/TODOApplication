@@ -75,6 +75,26 @@ public class TodoService {
         }
     }
 
+    public TodoDto save(CreateTodoDto todo) {
+
+        // pobieramy użytkownika z bazy
+        UserEntity userEntity = userRepository.findById(todo.getUserId());
+
+        TodoEntity entity = new TodoEntity(todo.getText());
+
+        // łączymy relacyjnie tabele Todo i User
+        entity.setUser(userEntity);
+
+        try {
+            TodoEntity todoEntity = todoRepository.save(entity);
+            return TodoMapper.mapeEntityToDto(todoEntity);
+        } catch (Exception exception) {
+            // handle exception
+        }
+
+        return null;
+    }
+
     public TodoDto complete(Long id) {
         Optional<TodoEntity> entity = todoRepository.findById(id);
         if (entity.isPresent()) {
